@@ -1,5 +1,7 @@
 body{
-    background-image:url("../images/honey.png")
+    background-image:url("../images/banana.jpeg");
+    background-size:cover;
+    
 }
 
 h1{
