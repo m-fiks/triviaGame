@@ -2,59 +2,60 @@
 
 $(document).ready(function(){
 
+let playerChoice='';
 let correctAnswer = '';
 const theQuestions= [
     {
     question:'Where is there always money?',
     choices: ['the bank','under the bed','the banana stand'],
-    correctAnswer: 2,
+    correctAnswer: 'the banana stand',
     },
 
     {
     question:'What is Gob\'s preffered method of transportation?',
     choices: ['stair car', 'segway','skateboard'],
-    correctAnswer: 1,
+    correctAnswer: 'segway',
         },
     {
     question: 'Which pharmaceutical product was promoted by \'Dr. Funke\'s Natural Good-Time Family Band Solution\'?',
     choices: ['teamocil','acarbose','tylenol'] ,
-    correctAnswer: 0,
+    correctAnswer: 'teamocil',
         },
     {
     question: 'What does Michael find in the freezer in season 1?',
     choices: ['a lot of money','fox foot','dead dove (do not eat)'],
-    correctAnswer: 2,
+    correctAnswer: 'dead dove (do not eat)',
             },
     {
     question: 'At one point, Gob belonged to \'The Alliance of Magicians\'. What is their slogan?',
     choices: ['We demand to be taken seriously','Got magic?','Criss Angel sucks'],
-    correctAnswer: 0,
+    correctAnswer: 'We demand to be taken seriously',
             },
     {
     question:  'Who is Ann?',
     choices: ['Lucille\'s best friend','Her?','George Michael\'s roommate'
     ],
-    correctAnswer: 1,
+    correctAnswer: 'Her?',
             },
     {
     question:  'What article of clothing is Tobias never without?',
     choices: ['Leather vest','Pirate Shirt','Denim Shorts'],
-    correctAnswer: 2,
+    correctAnswer: 'Denim Shorts',
         },
     {
     question:  'What condition does Lucille Two suffer from?',
     choices: ['Vertigo','Alopecia','Diabetes'],
-    correctAnswer: 0,
+    correctAnswer: 'Vertigo',
                 }, 
     {
     question:  'Who is STEVE HOLT\'S dad?',
     choices: ['Oscar','Stan Sitwell','Gob'],
-    correctAnswer: 2,
+    correctAnswer: 'Gob',
             }, 
     {
     question:  'Which Bluth sibling was adopted?',
     choices: ['Buster','Lindsay','Michael'],
-    correctAnswer: 1,
+    correctAnswer: 'Lindsay',
             }, 
     ]
 let currentChoices = "";
@@ -73,9 +74,11 @@ function questionDisplay (){
 //display answerchoices on page
 function choicesDisplay (){
     for (let i = 0; i < 3; i++){
-    currentChoices = chosenOne.choices[i];
-    $('#answers').append(`<div> ${currentChoices} </div>`);
-    //console.log(currentChoices);
+    currentChoices = chosenOne.choices;
+    $('#answer1').text(currentChoices[0]);
+    $('#answer2').text(currentChoices[1]);
+    $('#answer3').text(currentChoices[2]);
+    //console.log(chosenOne.correctAnswer);
     }
 }
 
@@ -86,10 +89,7 @@ const clickToStart = function() {
     $('.btn-success').hide();
 };
 
-$('.btn-success').click(clickToStart);
-
-// let delayButtonAlert = 0; 
-
+$('.btn-success').click(clickToStart); 
 
 //begin 30 second timer with each question
 function timer(){
@@ -109,9 +109,26 @@ function timer(){
 }
 
 $('#questionTime').mouseenter(function() {
-    timer();
+    
+        timer();
 });
 
 
-// $('#remainingTime').append(x);
+//click on choices function
+$('#answers').click(function(e) {
+    let playerChoice = $(event.target).text();
+    // console.log(playerChoice);
+    // console.log(chosenOne.correctAnswer);
+
+    //compare playerChoice to correct answer
+    if (playerChoice === chosenOne.correctAnswer){
+        console.log('yay good job!');
+    } else if (playerChoice !== chosenOne.correctAnswer){
+        console.log('loser');
+    }
+});
+
+
+
+
 });
