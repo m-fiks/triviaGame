@@ -40,13 +40,27 @@ const theQuestions= [
     question:  'What article of clothing is Tobias never without?',
     choices: ['Leather vest','Pirate Shirt','Denim Shorts'],
     correctAnswer: 2,
-        }, 
+        },
+    {
+    question:  'What condition does Lucille Two suffer from?',
+    choices: ['Vertigo','Alopecia','Diabetes'],
+    correctAnswer: 0,
+                }, 
+    {
+    question:  'Who is STEVE HOLT\'S dad?',
+    choices: ['Oscar','Stan Sitwell','Gob'],
+    correctAnswer: 2,
+            }, 
+    {
+    question:  'Which Bluth sibling was adopted?',
+    choices: ['Buster','Lindsay','Michael'],
+    correctAnswer: 1,
+            }, 
     ]
 let currentChoices = "";
 let currentQuestion ="";
 let chosenOne = theQuestions[Math.floor(Math.random() * theQuestions.length)]
-//  'What condition does Lucille Two suffer from?',
-// 'Who is STEVE HOLT\'S DAD?',  'Which Bluth sibling was adopted?'];
+
 //star wars kid video
 
 //get questions on page 
@@ -54,18 +68,50 @@ function questionDisplay (){
     currentQuestion = chosenOne.question;
     $('#questionTime').append(currentQuestion);
     //console.log(currentQuestion);   
-}
-questionDisplay();
+};
 
 //display answerchoices on page
 function choicesDisplay (){
     for (let i = 0; i < 3; i++){
     currentChoices = chosenOne.choices[i];
     $('#answers').append(`<div> ${currentChoices} </div>`);
-    console.log(currentChoices);
+    //console.log(currentChoices);
     }
 }
-choicesDisplay();
+
+//first start game
+const clickToStart = function() {
+    choicesDisplay();
+    questionDisplay();
+    $('.btn-success').hide();
+};
+
+$('.btn-success').click(clickToStart);
+
+// let delayButtonAlert = 0; 
+
+
+//begin 30 second timer with each question
+function timer(){
+    let x=$('.c').attr('id');
+    let c=x;
+    $('.c').text(c);
+    setInterval(function(){
+        c--;
+        if(c>=0){
+            $('.c').text(c);
+        }
+        if(c==0){
+            $('.c').text(x);
+        }
+    //run every second 
+    },1000);
+}
+
+$('#questionTime').mouseenter(function() {
+    timer();
+});
+
 
 // $('#remainingTime').append(x);
-})
+});

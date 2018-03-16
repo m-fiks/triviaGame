@@ -15,3 +15,7 @@ h1{
     border: solid 1 px gainsboro;
     text-align:center;
 }
+
+.timer{
+    font-size: 20px;
+}
