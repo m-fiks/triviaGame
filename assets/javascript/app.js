@@ -1,6 +1,7 @@
 'use strict';
 
 $(document).ready(function(){
+$('.timer').hide();
 
 let playerChoice='';
 let correctAnswer = '';
@@ -64,6 +65,22 @@ let chosenOne = theQuestions[Math.floor(Math.random() * theQuestions.length)]
 
 //star wars kid video
 
+let startOver = function (){
+
+}
+
+//hide main trivia screen when answer is clicked
+function choiceMade (){
+    $('#questionTime').hide()
+    $('.timer').hide()
+    $('#answers').hide()
+    $('.c').hide()
+};
+
+$('h1').click(choiceMade);
+
+
+
 //get questions on page 
 function questionDisplay (){
     currentQuestion = chosenOne.question;
@@ -84,6 +101,7 @@ function choicesDisplay (){
 
 //first start game
 const clickToStart = function() {
+    $('.timer').show();
     choicesDisplay();
     questionDisplay();
     $('.btn-success').hide();
@@ -109,7 +127,6 @@ function timer(){
 }
 
 $('#questionTime').mouseenter(function() {
-    
         timer();
 });
 
@@ -117,18 +134,33 @@ $('#questionTime').mouseenter(function() {
 //click on choices function
 $('#answers').click(function(e) {
     let playerChoice = $(event.target).text();
+    $(event.target).css('color', 'purple');
     // console.log(playerChoice);
     // console.log(chosenOne.correctAnswer);
 
     //compare playerChoice to correct answer
     if (playerChoice === chosenOne.correctAnswer){
         console.log('yay good job!');
+        choiceMade();
+        winner();
     } else if (playerChoice !== chosenOne.correctAnswer){
         console.log('loser');
+        choiceMade();
+        loser();
     }
 });
 
+//win and lose function
+function winner (){
+    $(event.target).css('color', 'green');
+    $('.main-col').append('<div> "Well, that was a freebie" </div>')
+    $('.main-col').append(`<div> "Nice job! <br> The answer was: ${chosenOne.correctAnswer}" </div>`)
+    $('.main-col').append('<div><img src="./assets/images/party.gif"></img>  </div>')
+};
 
+ function loser (){
+    $('.main-col').append('<div> "You\'ve made a huge mistake" </div>')
+};
 
 
 });
