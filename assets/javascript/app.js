@@ -166,6 +166,7 @@ function winner (){
 
 //timer runs out
 function timesUp () {
+    $('.c').empty()
     $('#resultPlace').append('<div> You ran out of time </div>')
     $('#resultPlace').append(`<div> <br> The correct answer was: ${chosenOne.correctAnswer}" </div>`)
     $('#resultPlace').append('<div><img src="./assets/images/darkness.gif"></img> </div>')
@@ -176,7 +177,6 @@ function timesUp () {
 function windowTimeout (){
     let switchPage = setTimeout(function(){ 
         $('#resultPlace').hide();
-        // clickToStart();
         $('h1').click(questionReset); 
     }, 5000);
 }
