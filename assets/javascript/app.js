@@ -61,9 +61,10 @@ const theQuestions= [
             }, 
     ]
 
-    let currentChoices = "";
+    let currentChoices = [];
     let currentQuestion ="";
     let chosenOne = "";
+
 
 //star wars kid video
 
@@ -80,24 +81,26 @@ $('.btn-success').click(clickToStart);
 //hide main trivia screen
 function choiceMade (){
     $('#questionTime').empty()
-    $('.timer').empty()
-    $('#answers').empty()
+    $('.timer').hide()
     $('.c').hide()
+    $('.c').empty();
+    $('#answer1').empty()
+    $('#answer2').empty()
+    $('#answer3').empty()
     windowTimeout();
 };
 
 // reset to next question
 function questionReset () {
-    timer();
+    // timer();
+    // c=0;
+    $('.c').empty()
+    $('.c').show();
     questionDisplay();
     choicesDisplay();
     chosenOne = "";
+    let playerChoice = "";
 };
-
-// //get next question
-// function nextQuestion() {
-
-// }
 
 //get questions on page 
 function questionDisplay (){
@@ -110,13 +113,15 @@ function questionDisplay (){
 
 //display answerchoices on page
 function choicesDisplay (){
+    for(let i =0; i < 3; i++){
     currentChoices = chosenOne.choices;
-   //console.log(currentChoices)
+    console.log(currentChoices)
     $('#answer1').text(currentChoices[0]);
     $('#answer2').text(currentChoices[1]);
     $('#answer3').text(currentChoices[2]);
     //console.log(currentChoices);
-}
+    };
+};
 
 //begin 30 second timer with each question
 function timer(){
@@ -128,11 +133,11 @@ function timer(){
         c--;
         if(c>=0){
             $('.c').text(c);
-        }
-        if(c==0){
-            $('.c').text(x);
-            choiceMade();
+        }if (c==0&&playerChoice === ""){
             timesUp();
+            choiceMade();
+         } if(c==0){
+            $('.c').text(x);   
         }
     //run every second 
     },1000);
@@ -146,7 +151,7 @@ $('#questionTime').mouseenter(function() {
 
 //win and lose function
 function winner (){
-    $(event.target).css('color', 'green');
+    // $(event.target).css('color', 'green');
     $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${chosenOne.correctAnswer} </div>`)
     $('#resultPlace').append('<div><img src="./assets/images/happy.gif"></img> </div>')
     $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
@@ -172,14 +177,14 @@ function windowTimeout (){
     let switchPage = setTimeout(function(){ 
         $('#resultPlace').hide();
         // clickToStart();
-        $('h1').click(clickToStart); 
+        $('h1').click(questionReset); 
     }, 5000);
 }
 
 //click on choices function
 $('#answers').click(function(e) {
-    let playerChoice = $(event.target).text();
-    $(event.target).css('color', 'purple');
+    playerChoice = $(event.target).text();
+    // $(event.target).css('color', 'purple');
     // console.log(playerChoice);
     // console.log(chosenOne.correctAnswer);
 
