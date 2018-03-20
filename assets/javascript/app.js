@@ -9,53 +9,62 @@ let theQuestions= [
     question:'Where is there always money?',
     choices: ['the bank','under the bed','the banana stand'],
     correctAnswer: 'the banana stand',
+    gif: "./assets/images/banstand.gif"
     },
 
     {
     question:'What is Gob\'s preffered method of transportation?',
     choices: ['stair car', 'segway','skateboard'],
     correctAnswer: 'segway',
+    gif: "./assets/images/segway.gif"
         },
     {
-    question: 'Which pharmaceutical product was promoted by \'Dr. Funke\'s Natural Good-Time Family Band Solution\'?',
-    choices: ['teamocil','acarbose','tylenol'] ,
-    correctAnswer: 'teamocil',
+    question: 'Buster is a graduate of the Milford School. What is the school\'s motto?',
+    choices: ['Hazard Zet Forward','Children should be neither seen nor heard','A building with four walls and tomorrow inside'] ,
+    correctAnswer: 'Children should be neither seen nor heard',
+    gif: "./assets/images/milford.gif"
         },
     {
     question: 'What does Michael find in the freezer in season 1?',
     choices: ['a lot of money','fox foot','dead dove (do not eat)'],
     correctAnswer: 'dead dove (do not eat)',
+    gif: "./assets/images/dove.gif"
             },
     {
     question: 'At one point, Gob belonged to \'The Alliance of Magicians\'. What is their slogan?',
     choices: ['We demand to be taken seriously','Got magic?','Criss Angel sucks'],
     correctAnswer: 'We demand to be taken seriously',
+    gif: "./assets/images/magic.gif"
             },
     {
-    question:  'Who is Ann?',
-    choices: ['Lucille\'s best friend','Her?','George Michael\'s roommate'
-    ],
+    question:  'Who is George Michael\'s first girlfriend?',
+    choices: ['Ann Veal','Her?','Rebel Alley'],
     correctAnswer: 'Her?',
+    gif: "./assets/images/her.gif"
             },
     {
     question:  'What article of clothing is Tobias never without?',
     choices: ['Leather vest','Pirate Shirt','Denim Shorts'],
     correctAnswer: 'Denim Shorts',
+    gif: "./assets/images/dozens.gif"
         },
     {
     question:  'What condition does Lucille Two suffer from?',
     choices: ['Vertigo','Alopecia','Diabetes'],
     correctAnswer: 'Vertigo',
+    gif: "./assets/images/vertigo.gif"
                 }, 
     {
     question:  'Who is STEVE HOLT\'S dad?',
     choices: ['Oscar','Stan Sitwell','Gob'],
     correctAnswer: 'Gob',
+    gif: "./assets/images/holt.gif"
             }, 
     {
     question:  'Which Bluth sibling was adopted?',
     choices: ['Buster','Lindsay','Michael'],
     correctAnswer: 'Lindsay',
+    gif: "./assets/images/lindsay.gif"
             }, 
     ];
     let playerChoice="";
@@ -142,7 +151,7 @@ function timer(){
 function winner () {
     // playerChoice="";
     // $(event.target).css('color', 'green');
-    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${theQuestions[0].correctAnswer} </div> <div> <img src="./assets/images/happy.gif"></img> </div>`)
+    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${theQuestions[0].correctAnswer} </div> <div><img src="${theQuestions[0].gif}"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
     winCounter++;
     //console.log(winCounter)
@@ -150,7 +159,7 @@ function winner () {
 
  function loser (){
     // playerChoice="";
-    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${theQuestions[0].correctAnswer} </div>  <div><img src="./assets/images/george-michael.gif"></img>`)
+    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${theQuestions[0].correctAnswer} </div>  <div><img src="${theQuestions[0].gif}"></div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
     loseCounter++;
     //console.log(loseCounter)
@@ -160,7 +169,7 @@ function winner () {
 function timesUp () {
     // playerChoice="";
     clearInterval(timerVariable);
-    $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${theQuestions[0].correctAnswer} </div> <img src="./assets/images/darkness.gif"></img> </div>`)
+    $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${theQuestions[0].correctAnswer} </div> <img src="${theQuestions[0].gif}"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
     choiceMade();
     loseCounter++;
@@ -226,53 +235,62 @@ function endGame(){
         question:'Where is there always money?',
         choices: ['the bank','under the bed','the banana stand'],
         correctAnswer: 'the banana stand',
+        gif: "./assets/images/banstand.gif"
         },
     
         {
         question:'What is Gob\'s preffered method of transportation?',
         choices: ['stair car', 'segway','skateboard'],
         correctAnswer: 'segway',
+        gif: "./assets/images/segway.gif"
             },
         {
-        question: 'Which pharmaceutical product was promoted by \'Dr. Funke\'s Natural Good-Time Family Band Solution\'?',
-        choices: ['teamocil','acarbose','tylenol'] ,
-        correctAnswer: 'teamocil',
-            },
+            question: 'Buster is a graduate of the Milford School. What is the school\'s motto?',
+            choices: ['Hazard Zet Forward','Children should be neither seen nor heard','A building with four walls and tomorrow inside'] ,
+            correctAnswer: 'Children should be neither seen nor heard',
+            gif: "./assets/images/milford.gif"
+                },
         {
         question: 'What does Michael find in the freezer in season 1?',
         choices: ['a lot of money','fox foot','dead dove (do not eat)'],
         correctAnswer: 'dead dove (do not eat)',
+        gif: "./assets/images/dove.gif"
                 },
         {
         question: 'At one point, Gob belonged to \'The Alliance of Magicians\'. What is their slogan?',
         choices: ['We demand to be taken seriously','Got magic?','Criss Angel sucks'],
         correctAnswer: 'We demand to be taken seriously',
+        gif: "./assets/images/magic.gif"
                 },
         {
-        question:  'Who is Ann?',
-        choices: ['Lucille\'s best friend','Her?','George Michael\'s roommate'
-        ],
+        question:  'Who is George Michael\'s first girlfriend?',
+        choices: ['Ann Veal','Her?','Rebel Alley'],
         correctAnswer: 'Her?',
+        gif: "./assets/images/her.gif"
                 },
         {
         question:  'What article of clothing is Tobias never without?',
         choices: ['Leather vest','Pirate Shirt','Denim Shorts'],
         correctAnswer: 'Denim Shorts',
+        gif: "./assets/images/dozens.gif"
             },
         {
         question:  'What condition does Lucille Two suffer from?',
         choices: ['Vertigo','Alopecia','Diabetes'],
         correctAnswer: 'Vertigo',
+        gif: "./assets/images/vertigo.gif"
                     }, 
         {
         question:  'Who is STEVE HOLT\'S dad?',
         choices: ['Oscar','Stan Sitwell','Gob'],
         correctAnswer: 'Gob',
+        gif: "./assets/images/holt.gif"
                 }, 
         {
         question:  'Which Bluth sibling was adopted?',
         choices: ['Buster','Lindsay','Michael'],
         correctAnswer: 'Lindsay',
+        gif: "./assets/images/lindsay.gif"
                 }, 
         ];
 }
