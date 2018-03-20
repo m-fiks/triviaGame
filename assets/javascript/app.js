@@ -3,9 +3,7 @@
 $(document).ready(function(){
 $('.timer').hide();
 
-let playerChoice='';
-let correctAnswer = '';
-
+//variables
 const theQuestions= [
     {
     question:'Where is there always money?',
@@ -61,12 +59,14 @@ const theQuestions= [
             }, 
     ]
 
+    let playerChoice="";
     let currentChoices = [];
     let currentQuestion ="";
+    let currentQuestionz = [];
     let chosenOne = "";
+    let c;
+    let timerVariable;
 
-
-//star wars kid video
 
 //initial start game
 function clickToStart() {
@@ -74,131 +74,125 @@ function clickToStart() {
     questionDisplay();
     choicesDisplay();
     $('.btn-success').hide();
+    timer();
 };
 
 $('.btn-success').click(clickToStart); 
 
-//hide main trivia screen
-function choiceMade (){
-    $('#questionTime').empty()
-    $('.timer').hide()
-    $('.c').hide()
-    $('.c').empty();
-    $('#answer1').empty()
-    $('#answer2').empty()
-    $('#answer3').empty()
-    windowTimeout();
-};
-
-// reset to next question
+//reset to next question
 function questionReset () {
-    // timer();
-    // c=0;
-    $('.c').empty()
-    $('.c').show();
+    //move already asked question to new array -- allowing next item to become the 0 index
+    currentQuestionz = theQuestions.shift();
+    console.log(currentQuestionz)
+    chosenOne = "";
+    timer();
+    $('.countdown').show();
     questionDisplay();
     choicesDisplay();
-    chosenOne = "";
-    let playerChoice = "";
 };
 
 //get questions on page 
 function questionDisplay (){
-    chosenOne = theQuestions[Math.floor(Math.random() * theQuestions.length)]
-    currentQuestion = chosenOne.question;
-    $('#questionTime').text(`${currentQuestion}`);
-    currentQuestion++;
-    console.log(chosenOne);
+    chosenOne = theQuestions[0].question
+    console.log(theQuestions[0].question)
+    $('#questionTime').text(chosenOne);
+    // console.log(chosenOne);
 };
 
 //display answerchoices on page
 function choicesDisplay (){
-    for(let i =0; i < 3; i++){
-    currentChoices = chosenOne.choices;
-    console.log(currentChoices)
+    currentChoices = theQuestions[0].choices;
+    console.log(theQuestions[0].choices)
     $('#answer1').text(currentChoices[0]);
     $('#answer2').text(currentChoices[1]);
     $('#answer3').text(currentChoices[2]);
-    //console.log(currentChoices);
-    };
 };
 
 //begin 30 second timer with each question
 function timer(){
-    let x=$('.c').attr('id');
-    let c=x;
+    let x=$('.countdown').attr('id');
+    c=x;
     // console.log(c)
-    $('.c').text(c);
-    setInterval(function(){
+    $('.countdown').text(c);
+    timerVariable= setInterval(function(){
         c--;
         if(c>=0){
-            $('.c').text(c);
-        }if (c==0&&playerChoice === ""){
-            timesUp();
-            choiceMade();
-         } if(c==0){
-            $('.c').text(x);   
+            $('.countdown').text(c);
+        }if(c===0){
+        $('.countdown').text(x);
+        timesUp();
         }
     //run every second 
     },1000);
-
 }
 
-//begin 30 sec timer 
-$('#questionTime').mouseenter(function() {
-    timer();
-});
-
 //win and lose function
-function winner (){
+function winner () {
+    // playerChoice="";
     // $(event.target).css('color', 'green');
-    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${chosenOne.correctAnswer} </div>`)
-    $('#resultPlace').append('<div><img src="./assets/images/happy.gif"></img> </div>')
+    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${theQuestions[0].correctAnswer} </div> <div> <img src="./assets/images/happy.gif"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
 };
 
  function loser (){
-    $('#resultPlace').append('<div> You\'ve made a huge mistake </div>')
-    $('#resultPlace').append(`<div> <br> The correct answer was: ${chosenOne.correctAnswer} </div>`)
-    $('#resultPlace').append('<div><img src="./assets/images/george-michael.gif"></img> </div>')
+    // playerChoice="";
+    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${theQuestions[0].correctAnswer} </div>  <div><img src="./assets/images/george-michael.gif"></img>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
 };
 
 //timer runs out
 function timesUp () {
-    $('.c').empty()
-    $('#resultPlace').append('<div> You ran out of time </div>')
-    $('#resultPlace').append(`<div> <br> The correct answer was: ${chosenOne.correctAnswer}" </div>`)
-    $('#resultPlace').append('<div><img src="./assets/images/darkness.gif"></img> </div>')
+    // playerChoice="";
+    clearInterval(timerVariable);
+    $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${theQuestions[0].correctAnswer} </div> <img src="./assets/images/darkness.gif"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
+    choiceMade();
 };
 
-//display next question
-function windowTimeout (){
-    let switchPage = setTimeout(function(){ 
-        $('#resultPlace').hide();
-        $('h1').click(questionReset); 
-    }, 5000);
-}
 
-//click on choices function
+//if player makes a choice
 $('#answers').click(function(e) {
+    clearInterval(timerVariable);
     playerChoice = $(event.target).text();
     // $(event.target).css('color', 'purple');
     // console.log(playerChoice);
     // console.log(chosenOne.correctAnswer);
 
     //compare playerChoice to correct answer
-    if (playerChoice === chosenOne.correctAnswer){
-        console.log('yay good job!');
+    if (playerChoice === theQuestions[0].correctAnswer){
+        // console.log('yay good job!');
         choiceMade();
         winner();
-    } else if (playerChoice !== chosenOne.correctAnswer){
-        console.log('loser');
+    } else if (playerChoice !== theQuestions[0].correctAnswer){
+        // console.log('loser');
         choiceMade();
         loser();
-    }
+        };
+    });
+
     
-});
+//hide main trivia screen
+function choiceMade () {
+    // console.log('we made it!');
+    $('#questionTime').empty()
+    $('#answer1').empty()
+    $('#answer2').empty()
+    $('#answer3').empty()
+    $('.timer').hide()
+    $('.countdown').hide()
+    $('.countdown').empty();
+    windowTimeout();
+};
+
+//display next question
+function windowTimeout (){
+    setTimeout(function(){ 
+    $('#resultPlace').empty();
+    questionReset();
+}, 4000);
+}
+
+//end game
+
 
 });
