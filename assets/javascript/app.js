@@ -58,7 +58,6 @@ let theQuestions= [
     correctAnswer: 'Lindsay',
             }, 
     ];
-
     let playerChoice="";
     let currentChoices = [];
     let currentQuestion ="";
@@ -66,15 +65,19 @@ let theQuestions= [
     let chosenOne = "";
     let c;
     let timerVariable;
+    let winCounter=0;
+    let loseCounter=0;
 
 //initial start game
 function clickToStart() {
     $('.timer').show();
+    $('.countdown').show();
     questionDisplay();
     choicesDisplay();
     $('.btn-success').hide();
     timer();
     $('#answers').show();
+    $('#win-or-lose').empty();
 };
 
 $('.btn-success').click(clickToStart); 
@@ -88,6 +91,7 @@ function questionReset () {
     // console.log(theQuestions)
     chosenOne = "";
     timer();
+    $('.timer').show();
     $('.countdown').show();
     questionDisplay();
     choicesDisplay();
@@ -140,12 +144,16 @@ function winner () {
     // $(event.target).css('color', 'green');
     $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${theQuestions[0].correctAnswer} </div> <div> <img src="./assets/images/happy.gif"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
+    winCounter++;
+    //console.log(winCounter)
 };
 
  function loser (){
     // playerChoice="";
     $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${theQuestions[0].correctAnswer} </div>  <div><img src="./assets/images/george-michael.gif"></img>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
+    loseCounter++;
+    //console.log(loseCounter)
 };
 
 //timer runs out
@@ -155,8 +163,9 @@ function timesUp () {
     $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${theQuestions[0].correctAnswer} </div> <img src="./assets/images/darkness.gif"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
     choiceMade();
+    loseCounter++;
+    //console.log(loseCounter)
 };
-
 
 //if player makes a choice
 $('#answers').click(function(e) {
@@ -207,9 +216,10 @@ function endGame(){
     clearInterval(timerVariable);
     $('.timer').hide()
     $('.countdown').hide()
-    $('.countdown').empty();
+    // $('.countdown').empty();
     $('#answers').hide();
-    $('#questionTime').text('the end. play again?');
+    $('#win-or-lose').text(`FINAL SCORE: ${winCounter}/10`);
+    $('#win-or-lose').append(`<div> Play again? </div>`);
     //repopulate array
     theQuestions= [
         {
