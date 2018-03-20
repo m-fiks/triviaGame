@@ -217,7 +217,7 @@ function windowTimeout (){
     setTimeout(function(){ 
     $('#resultPlace').empty();
     questionReset();
-}, 3000);
+}, 4000);
 }
 
 //endgame function
