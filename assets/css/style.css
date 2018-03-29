@@ -1,0 +1,46 @@
+/* font-family: 'Mina', sans-serif;
+font-family: 'Merriweather', serif; */
+body{
+    background-image:url("../images/banana.jpeg");
+    background-size:cover;
+    cursor:pointer;
+    font-family: 'Mina', sans-serif;
+}
+
+h1{
+    color:rgb(39, 137, 250);
+    text-align:center;
+    font-size: 60px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.main-col {
+    background-color: white;
+    border: solid 1 px gainsboro;
+    text-align:center;
+}
+
+.timer{
+    font-size: 14px;
+}
+
+#answer1:hover{
+    background-color:rgb(22, 142, 172);
+    color:white;
+}
+#answer2:hover{
+    background-color:rgb(22, 142, 172);
+    color:white;
+}
+#answer3:hover{
+    background-color:rgb(22, 142, 172);
+    color:white;
+}
+
+#resultPlace {
+    font-size: 18px;
+}
+
+#questionTime{
+    font-size: 24px;
+}
