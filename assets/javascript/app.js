@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function(){
+$(document).ready(() => {
 $('.timer').hide();
 
 //variables
@@ -134,7 +134,7 @@ function timer(){
     let timer=$('.countdown').attr('id');
     // console.log(c)
     $('.countdown').text(timer);
-    timerVariable= setInterval(function(){
+    timerVariable= setInterval(() => {
         timer--;
         if(timer > 0){
             $('.countdown').text(timer);
@@ -213,10 +213,10 @@ function choiceMade () {
 
 //display next question
 function windowTimeout (){
-    setTimeout(function(){ 
+    setTimeout(() => { 
     $('#resultPlace').empty();
     questionReset();
-}, 4000);
+}, 3000);
 }
 
 //endgame function
