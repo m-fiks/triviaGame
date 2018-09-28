@@ -108,11 +108,11 @@ function questionReset () {
 
 //get questions on page 
 function questionDisplay (){
-    if (theQuestions.length == 0){
+    if (theQuestions.length === 0){
         // alert('the end');
         $('.btn-success').show();
         endGame();
-    } else if (theQuestions.length > 0){
+    } else {
     chosenOne = theQuestions[0].question
     // console.log(theQuestions[0].question)
     $('#questionTime').text(chosenOne);
@@ -131,16 +131,15 @@ function choicesDisplay (){
 
 //begin 30 second timer with each question
 function timer(){
-    let x=$('.countdown').attr('id');
-    c=x;
+    let timer=$('.countdown').attr('id');
     // console.log(c)
-    $('.countdown').text(c);
+    $('.countdown').text(timer);
     timerVariable= setInterval(function(){
-        c--;
-        if(c>=0){
-            $('.countdown').text(c);
-        }if(c===0){
-        $('.countdown').text(x);
+        timer--;
+        if(timer > 0){
+            $('.countdown').text(timer);
+        }else {
+        $('.countdown').text(timer);
         timesUp();
         }
     //run every second 
@@ -182,17 +181,12 @@ $('#answers').click(function(e) {
 // console.log(typeof(theQuestions));
     clearInterval(timerVariable);
     playerChoice = $(event.target).text();
-    // $(event.target).css('color', 'purple');
-    // console.log(playerChoice);
-    // console.log(chosenOne.correctAnswer);
 
     //compare playerChoice to correct answer
     if (playerChoice === theQuestions[0].correctAnswer){
-        // console.log('yay good job!');
         choiceMade();
         winner();
-    } else if (playerChoice !== theQuestions[0].correctAnswer){
-        // console.log('loser');
+    } else {
         choiceMade();
         loser();
         };
@@ -201,7 +195,6 @@ $('#answers').click(function(e) {
     
 //hide main trivia screen
 function choiceMade () {
-    // console.log('we made it!');
     $('#questionTime').empty()
     $('#answer1').empty()
     $('#answer2').empty()
@@ -229,6 +222,7 @@ function endGame(){
     $('#answers').hide();
     $('#win-or-lose').text(`FINAL SCORE: ${winCounter}/10`);
     $('#win-or-lose').append(`<div> Play again? </div>`);
+    
     //repopulate array
     theQuestions= [
         {
