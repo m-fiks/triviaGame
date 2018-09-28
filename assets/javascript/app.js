@@ -1,10 +1,8 @@
-'use strict';
-
 $(document).ready(() => {
-$('.timer').hide();
 
-//variables
-let theQuestions= [
+$('.timer').hide();
+//questions
+const theQuestions= [
     {
     question:'Where is there always money?',
     choices: ['the bank','under the bed','the banana stand'],
@@ -67,15 +65,16 @@ let theQuestions= [
     gif: "./assets/images/lindsay.gif"
             }, 
     ];
-    let playerChoice="";
-    let currentChoices = [];
-    let currentQuestion ="";
-    let currentQuestionz = [];
-    let chosenOne = "";
-    let c;
-    let timerVariable;
-    let winCounter=0;
-    let loseCounter=0;
+
+//variables
+let playerChoice="";
+let currentChoices = [];
+let currentQuestion ="";
+let currentQuestionz = [];
+let chosenOne = "";
+let timerVariable;
+let winCounter=0;
+let loseCounter=0;
 
 //initial start game
 function clickToStart() {
@@ -94,10 +93,8 @@ $('.btn-success').click(clickToStart);
 //reset to next question
 function questionReset () {
     //move already asked question to new array -- allowing next item to become the 0 index
-    currentQuestionz = theQuestions.shift();
-    console.log(theQuestions.length);
-    // console.log(currentQuestionz)
-    // console.log(theQuestions)
+    currentQuestionz.push(theQuestions.shift());
+    console.log(currentQuestionz)
     chosenOne = "";
     timer();
     $('.timer').show();
@@ -113,17 +110,16 @@ function questionDisplay (){
         $('.btn-success').show();
         endGame();
     } else if (theQuestions.length > 0){
-    chosenOne = theQuestions[0].question
-    // console.log(theQuestions[0].question)
+    currentQuestion = theQuestions[0];
+    chosenOne = currentQuestion.question;
     $('#questionTime').text(chosenOne);
-    // console.log(chosenOne);
     }
 };
 
 //display answerchoices on page
 function choicesDisplay (){
-    currentChoices = theQuestions[0].choices;
-    // console.log(theQuestions[0].choices)
+    currentChoices = currentQuestion.choices;
+    console.log(currentChoices)
     $('#answer1').text(currentChoices[0]);
     $('#answer2').text(currentChoices[1]);
     $('#answer3').text(currentChoices[2]);
@@ -150,7 +146,7 @@ function timer(){
 function winner () {
     // playerChoice="";
     // $(event.target).css('color', 'green');
-    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${theQuestions[0].correctAnswer} </div> <div><img src="${theQuestions[0].gif}"></img> </div>`)
+    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${currentQuestion.correctAnswer} </div> <div><img src="${currentQuestion.gif}"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
     winCounter++;
     //console.log(winCounter)
@@ -158,7 +154,7 @@ function winner () {
 
  function loser (){
     // playerChoice="";
-    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${theQuestions[0].correctAnswer} </div>  <div><img src="${theQuestions[0].gif}"></div>`)
+    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${currentQuestion.correctAnswer} </div>  <div><img src="${currentQuestion.gif}"></div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
     loseCounter++;
     //console.log(loseCounter)
@@ -168,7 +164,7 @@ function winner () {
 function timesUp () {
     // playerChoice="";
     clearInterval(timerVariable);
-    $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${theQuestions[0].correctAnswer} </div> <img src="${theQuestions[0].gif}"></img> </div>`)
+    $('#resultPlace').append(`<div> You ran out of time </div> <div> <br> The correct answer was: ${currentQuestion.correctAnswer} </div> <img src="${currentQuestion.gif}"></img> </div>`)
     $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
     choiceMade();
     loseCounter++;
@@ -186,11 +182,11 @@ $('#answers').click(function(e) {
     // console.log(chosenOne.correctAnswer);
 
     //compare playerChoice to correct answer
-    if (playerChoice === theQuestions[0].correctAnswer){
+    if (playerChoice === currentQuestion.correctAnswer){
         // console.log('yay good job!');
         choiceMade();
         winner();
-    } else if (playerChoice !== theQuestions[0].correctAnswer){
+    } else if (playerChoice !== currentQuestion.correctAnswer){
         // console.log('loser');
         choiceMade();
         loser();
@@ -228,70 +224,7 @@ function endGame(){
     $('#answers').hide();
     $('#win-or-lose').text(`FINAL SCORE: ${winCounter}/10`);
     $('#win-or-lose').append(`<div> Play again? </div>`);
-    //repopulate array
-    theQuestions= [
-        {
-        question:'Where is there always money?',
-        choices: ['the bank','under the bed','the banana stand'],
-        correctAnswer: 'the banana stand',
-        gif: "./assets/images/banstand.gif"
-        },
-    
-        {
-        question:'What is Gob\'s preffered method of transportation?',
-        choices: ['stair car', 'segway','skateboard'],
-        correctAnswer: 'segway',
-        gif: "./assets/images/segway.gif"
-            },
-        {
-            question: 'Buster is a graduate of the Milford School. What is the school\'s motto?',
-            choices: ['Hazard Zet Forward','Children should be neither seen nor heard','A building with four walls and tomorrow inside'] ,
-            correctAnswer: 'Children should be neither seen nor heard',
-            gif: "./assets/images/milford.gif"
-                },
-        {
-        question: 'What does Michael find in the freezer in season 1?',
-        choices: ['a lot of money','fox foot','dead dove (do not eat)'],
-        correctAnswer: 'dead dove (do not eat)',
-        gif: "./assets/images/dove.gif"
-                },
-        {
-        question: 'At one point, Gob belonged to \'The Alliance of Magicians\'. What is their slogan?',
-        choices: ['We demand to be taken seriously','Got magic?','Criss Angel sucks'],
-        correctAnswer: 'We demand to be taken seriously',
-        gif: "./assets/images/magic.gif"
-                },
-        {
-        question:  'Who is George Michael\'s first girlfriend?',
-        choices: ['Ann Veal','Her?','Rebel Alley'],
-        correctAnswer: 'Her?',
-        gif: "./assets/images/her.gif"
-                },
-        {
-        question:  'What article of clothing is Tobias never without?',
-        choices: ['Leather vest','Pirate Shirt','Denim Shorts'],
-        correctAnswer: 'Denim Shorts',
-        gif: "./assets/images/dozens.gif"
-            },
-        {
-        question:  'What condition does Lucille Two suffer from?',
-        choices: ['Vertigo','Alopecia','Diabetes'],
-        correctAnswer: 'Vertigo',
-        gif: "./assets/images/vertigo.gif"
-                    }, 
-        {
-        question:  'Who is STEVE HOLT\'S dad?',
-        choices: ['Oscar','Stan Sitwell','Gob'],
-        correctAnswer: 'Gob',
-        gif: "./assets/images/holt.gif"
-                }, 
-        {
-        question:  'Which Bluth sibling was adopted?',
-        choices: ['Buster','Lindsay','Michael'],
-        correctAnswer: 'Lindsay',
-        gif: "./assets/images/lindsay.gif"
-                }, 
-        ];
+    //repopulate array??
 }
 
 });
