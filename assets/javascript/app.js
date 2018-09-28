@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function(){
+$(document).ready(() => {
 $('.timer').hide();
 
 //variables
@@ -108,11 +108,11 @@ function questionReset () {
 
 //get questions on page 
 function questionDisplay (){
-    if (theQuestions.length === 0){
+    if (theQuestions.length == 0){
         // alert('the end');
         $('.btn-success').show();
         endGame();
-    } else {
+    } else if (theQuestions.length > 0){
     chosenOne = theQuestions[0].question
     // console.log(theQuestions[0].question)
     $('#questionTime').text(chosenOne);
@@ -134,7 +134,7 @@ function timer(){
     let timer=$('.countdown').attr('id');
     // console.log(c)
     $('.countdown').text(timer);
-    timerVariable= setInterval(function(){
+    timerVariable= setInterval(() => {
         timer--;
         if(timer > 0){
             $('.countdown').text(timer);
@@ -143,7 +143,7 @@ function timer(){
         timesUp();
         }
     //run every second 
-    },1000);
+    },1000)
 }
 
 //win and lose function
@@ -181,12 +181,17 @@ $('#answers').click(function(e) {
 // console.log(typeof(theQuestions));
     clearInterval(timerVariable);
     playerChoice = $(event.target).text();
+    // $(event.target).css('color', 'purple');
+    // console.log(playerChoice);
+    // console.log(chosenOne.correctAnswer);
 
     //compare playerChoice to correct answer
     if (playerChoice === theQuestions[0].correctAnswer){
+        // console.log('yay good job!');
         choiceMade();
         winner();
-    } else {
+    } else if (playerChoice !== theQuestions[0].correctAnswer){
+        // console.log('loser');
         choiceMade();
         loser();
         };
@@ -195,6 +200,7 @@ $('#answers').click(function(e) {
     
 //hide main trivia screen
 function choiceMade () {
+    // console.log('we made it!');
     $('#questionTime').empty()
     $('#answer1').empty()
     $('#answer2').empty()
@@ -207,10 +213,10 @@ function choiceMade () {
 
 //display next question
 function windowTimeout (){
-    setTimeout(function(){ 
+    setTimeout(() => { 
     $('#resultPlace').empty();
     questionReset();
-}, 4000);
+}, 3000);
 }
 
 //endgame function
@@ -222,7 +228,6 @@ function endGame(){
     $('#answers').hide();
     $('#win-or-lose').text(`FINAL SCORE: ${winCounter}/10`);
     $('#win-or-lose').append(`<div> Play again? </div>`);
-    
     //repopulate array
     theQuestions= [
         {
