@@ -142,24 +142,6 @@ function timer(){
     },1000)
 }
 
-//win and lose function
-function winner () {
-    // playerChoice="";
-    // $(event.target).css('color', 'green');
-    $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${currentQuestion.correctAnswer} </div> <div><img src="${currentQuestion.gif}"></img> </div>`)
-    $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
-    winCounter++;
-    //console.log(winCounter)
-};
-
- function loser (){
-    // playerChoice="";
-    $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${currentQuestion.correctAnswer} </div>  <div><img src="${currentQuestion.gif}"></div>`)
-    $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
-    loseCounter++;
-    //console.log(loseCounter)
-};
-
 //timer runs out
 function timesUp () {
     // playerChoice="";
@@ -171,6 +153,8 @@ function timesUp () {
     //console.log(loseCounter)
 };
 
+// take out winner and loser questions and make this into one with if else statement
+//also else for if time runs out
 //if player makes a choice
 $('#answers').click(function(e) {
     //end game
@@ -183,13 +167,15 @@ $('#answers').click(function(e) {
 
     //compare playerChoice to correct answer
     if (playerChoice === currentQuestion.correctAnswer){
-        // console.log('yay good job!');
         choiceMade();
-        winner();
+        $('#resultPlace').append(`<div id="resultArea"> Nice job! <br> The answer was: ${currentQuestion.correctAnswer} </div> <div><img src="${currentQuestion.gif}"></img> </div>`)
+        $('#resultPlace').append(`<div style="color:white"> ' '</div>`)
+        winCounter++;
     } else if (playerChoice !== currentQuestion.correctAnswer){
-        // console.log('loser');
         choiceMade();
-        loser();
+        $('#resultPlace').append(`<div> You\'ve made a huge mistake  <br> The correct answer was: ${currentQuestion.correctAnswer} </div>  <div><img src="${currentQuestion.gif}"></div>`)
+        $('#resultPlace').append(`<div style="color:white"> ' '  </div>`)
+        loseCounter++;
         };
     });
 
