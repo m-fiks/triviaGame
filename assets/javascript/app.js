@@ -131,20 +131,19 @@ function choicesDisplay (){
 
 //begin 30 second timer with each question
 function timer(){
-    let x=$('.countdown').attr('id');
-    c=x;
+    let timer=$('.countdown').attr('id');
     // console.log(c)
-    $('.countdown').text(c);
+    $('.countdown').text(timer);
     timerVariable= setInterval(function(){
-        c--;
-        if(c>=0){
-            $('.countdown').text(c);
-        }if(c===0){
-        $('.countdown').text(x);
+        timer--;
+        if(timer > 0){
+            $('.countdown').text(timer);
+        }else {
+        $('.countdown').text(timer);
         timesUp();
         }
     //run every second 
-    },1000);
+    },1000)
 }
 
 //win and lose function
